@@ -45,7 +45,7 @@ def process_uploaded_file(file):
         # column11_dataの要素が5の場合は1にし、その他を0にするリストを作成する
         column11_data_5to1 = [1 if x == 5 else 0 for x in column11_data]
         column11_data_1to1 = [1 if x == 1 else 0 for x in column11_data]
-
+        st.write(column11_data_5to1)
         column12_data = df.iloc[:, 3].tolist()
         column12_data_5to1 = [1 if x == 5 else 0 for x in column12_data]
         column12_data_1to1 = [1 if x == 1 else 0 for x in column12_data]
@@ -280,6 +280,8 @@ try:
         
         cost2 = 1/K * sum((sum(w1[i]*x[i,k] for i in range(N)) - 1/K * sum(sum(w1[i]*x[i,k] for i in range(N)) for k in range(K)))**2 for k in range(K))
         cost3 = 1/K * sum((sum(w2[i]*x[i,k] for i in range(N)) - 1/K * sum(sum(w2[i]*x[i,k] for i in range(N)) for k in range(K)))**2 for k in range(K))
+        
+        st.write(w11_5to1)
 
         if before_class == 1:
             #同じクラスだと加算する
@@ -318,7 +320,7 @@ try:
             # 実行マシンクライアントの設定
         client = FixstarsClient()
         client.token = token
-        client.parameters.timeout = 1 * 200  # タイムアウト0.2秒
+        client.parameters.timeout = 1 * 500  # タイムアウト0.2秒
 
             # アニーリングマシンの実行
         solver = Solver(client)  # ソルバーに使用するクライアントを設定
