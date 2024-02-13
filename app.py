@@ -45,7 +45,7 @@ def process_uploaded_file(file):
         # column11_dataの要素が5の場合は1にし、その他を0にするリストを作成する
         column11_data_5to1 = [1 if x == 5 else 0 for x in column11_data]
         column11_data_1to1 = [1 if x == 1 else 0 for x in column11_data]
-        st.write(column11_data_5to1)
+#        st.write(column11_data_5to1)
         column12_data = df.iloc[:, 3].tolist()
         column12_data_5to1 = [1 if x == 5 else 0 for x in column12_data]
         column12_data_1to1 = [1 if x == 1 else 0 for x in column12_data]
@@ -231,7 +231,7 @@ try:
 
             p=np.array(one_hot)
             # Print the one-hot matrix
-            #print(p)
+            st.write(p)
 
 
         lam1 = 10
@@ -281,17 +281,16 @@ try:
         cost2 = 1/K * sum((sum(w1[i]*x[i,k] for i in range(N)) - 1/K * sum(sum(w1[i]*x[i,k] for i in range(N)) for k in range(K)))**2 for k in range(K))
         cost3 = 1/K * sum((sum(w2[i]*x[i,k] for i in range(N)) - 1/K * sum(sum(w2[i]*x[i,k] for i in range(N)) for k in range(K)))**2 for k in range(K))
         
-        st.write(w11_5to1)
+#        st.write(w11_5to1)
 
         if before_class == 1:
-            #同じクラスだと加算する
-            cost4_in=0
-            for k in range(K):
-            #  for i in range(N):
-            #    if p[i,k]==1:
-            #      cost4_in += (sum(p[i,k]*x[i,k] for k in range(K)))**2
-                cost4_in = sum((sum(p[i, k] * x[i, k] for k in range(K)))**2 for i in range(N) if p[i, k] == 1)
-            cost4 = 1/N*cost4_in
+
+            cost4_0 = 1/K * sum((sum(p[i,0]*x[i,k] for i in range(N)) - 1/K * sum(sum(p[i,0]*x[i,k] for i in range(N)) for k in range(K)))**2 for k in range(K))
+            cost4_1 = 1/K * sum((sum(p[i,1]*x[i,k] for i in range(N)) - 1/K * sum(sum(p[i,1]*x[i,k] for i in range(N)) for k in range(K)))**2 for k in range(K))
+            cost4_2 = 1/K * sum((sum(p[i,2]*x[i,k] for i in range(N)) - 1/K * sum(sum(p[i,2]*x[i,k] for i in range(N)) for k in range(K)))**2 for k in range(K))
+            cost4_3 = 1/K * sum((sum(p[i,3]*x[i,k] for i in range(N)) - 1/K * sum(sum(p[i,3]*x[i,k] for i in range(N)) for k in range(K)))**2 for k in range(K))
+
+            cost4 = cost4_0 + cost4_1 + cost4_2 + cost4_3
 
             cost = a11*cost11 + a12*cost12 + a13*cost13 + a14*cost14 + a15*cost15 + a16*cost16 + a17*cost17+ b*cost2 + c*cost3 +d*cost4\
                + a11*cost11_5to1 + a11*cost11_1to1 + a12*cost12_5to1 + a12*cost12_1to1 + a13*cost13_5to1 + a13*cost13_1to1 \
