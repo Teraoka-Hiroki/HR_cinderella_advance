@@ -231,7 +231,7 @@ try:
 
             p=np.array(one_hot)
             # Print the one-hot matrix
-            st.write(p)
+#            st.write(p)
 
 
         lam1 = 10
@@ -525,5 +525,5 @@ try:
         st.write(output_text)
 
 except Exception as e:
-#    st.error("ファイルアップロード後に計算されます".format(e))
-    st.error("ファイルアップロード後に計算されます{}".format(e))
+    st.error("ファイルアップロード後に計算されます".format(e))
+#    st.error("ファイルアップロード後に計算されます{}".format(e))
