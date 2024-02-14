@@ -237,16 +237,16 @@ try:
         lam1 = 10
         lam2 = 10
 
-        a11=3
-        a12=3
-        a13=3
-        a14=3
-        a15=3
-        a16=3
-        a17=3
+        a11=5
+        a12=5
+        a13=5
+        a14=5
+        a15=5
+        a16=5
+        a17=5
 
-        b=3
-        c=3
+        b=5
+        c=5
         d=1
 
         cost11  = 1/K * sum((sum(w11[i]*x[i,k] for i in range(N)) - 1/K * sum(sum(w11[i]*x[i,k] for i in range(N)) for k in range(K)))**2 for k in range(K))
