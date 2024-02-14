@@ -349,7 +349,7 @@ try:
         Wu12 = 1/K * sum(w12[i]*sum(sample_array[i][k] for k in range(K)) for i in range(N))
         st.write('成績2：'f'ave={Wu12}')
         Wu13 = 1/K * sum(w13[i]*sum(sample_array[i][k] for k in range(K)) for i in range(N))
-        st.write('成績3：'f'ave={Wu13')
+        st.write('成績3：'f'ave={Wu13}')
         Wu14 = 1/K * sum(w14[i]*sum(sample_array[i][k] for k in range(K)) for i in range(N))
         st.write('成績4：'f'ave={Wu14}')
         Wu15 = 1/K * sum(w15[i]*sum(sample_array[i][k] for k in range(K)) for i in range(N))
