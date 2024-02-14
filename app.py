@@ -344,20 +344,20 @@ try:
         st.write('')
         st.write('結果の確認')
         #生徒の成績テーブルの平均
-        Wu = 1/K * sum(w11[i]*sum(sample_array[i][k] for k in range(K)) for i in range(N))
-        st.write('成績1：'f'ave={Wu}')
-        Wu = 1/K * sum(w12[i]*sum(sample_array[i][k] for k in range(K)) for i in range(N))
-        st.write('成績2：'f'ave={Wu}')
-        Wu = 1/K * sum(w13[i]*sum(sample_array[i][k] for k in range(K)) for i in range(N))
-        st.write('成績3：'f'ave={Wu}')
-        Wu = 1/K * sum(w14[i]*sum(sample_array[i][k] for k in range(K)) for i in range(N))
-        st.write('成績4：'f'ave={Wu}')
-        Wu = 1/K * sum(w15[i]*sum(sample_array[i][k] for k in range(K)) for i in range(N))
-        st.write('成績5：'f'ave={Wu}')
-        Wu = 1/K * sum(w16[i]*sum(sample_array[i][k] for k in range(K)) for i in range(N))
-        st.write('成績6：'f'ave={Wu}')
-        Wu = 1/K * sum(w17[i]*sum(sample_array[i][k] for k in range(K)) for i in range(N))
-        st.write('成績7：'f'ave={Wu}')
+        Wu11 = 1/K * sum(w11[i]*sum(sample_array[i][k] for k in range(K)) for i in range(N))
+        st.write('成績1：'f'ave={Wu11}')
+        Wu12 = 1/K * sum(w12[i]*sum(sample_array[i][k] for k in range(K)) for i in range(N))
+        st.write('成績2：'f'ave={Wu12}')
+        Wu13 = 1/K * sum(w13[i]*sum(sample_array[i][k] for k in range(K)) for i in range(N))
+        st.write('成績3：'f'ave={Wu13')
+        Wu14 = 1/K * sum(w14[i]*sum(sample_array[i][k] for k in range(K)) for i in range(N))
+        st.write('成績4：'f'ave={Wu14}')
+        Wu15 = 1/K * sum(w15[i]*sum(sample_array[i][k] for k in range(K)) for i in range(N))
+        st.write('成績5：'f'ave={Wu15}')
+        Wu16 = 1/K * sum(w16[i]*sum(sample_array[i][k] for k in range(K)) for i in range(N))
+        st.write('成績6：'f'ave={Wu16}')
+        Wu17 = 1/K * sum(w17[i]*sum(sample_array[i][k] for k in range(K)) for i in range(N))
+        st.write('成績7：'f'ave={Wu17}')
 
         W1u = 1/K * sum(w1[i]*sum(sample_array[i][k] for k in range(K)) for i in range(N))
         st.write('性別：'f'ave1={W1u}')
@@ -373,7 +373,7 @@ try:
           for i in range(N):
             value = value + sample_array[i][k] * w11[i]
           st.write(f'{value=}')
-          cost = cost + (value - Wu)**2
+          cost = cost + (value - Wu11)**2
         cost = 1/K * cost
         st.write(f'{cost=}')
         standard_deviation = math.sqrt(cost)#標準偏差
@@ -387,7 +387,7 @@ try:
           for i in range(N):
             value = value + sample_array[i][k] * w12[i]
           st.write(f'{value=}')
-          cost = cost + (value - Wu)**2
+          cost = cost + (value - Wu12)**2
         cost = 1/K * cost
         st.write(f'{cost=}')
         standard_deviation = math.sqrt(cost)#標準偏差
@@ -401,7 +401,7 @@ try:
           for i in range(N):
             value = value + sample_array[i][k] * w13[i]
           st.write(f'{value=}')
-          cost = cost + (value - Wu)**2
+          cost = cost + (value - Wu13)**2
         cost = 1/K * cost
         st.write(f'{cost=}')
         standard_deviation = math.sqrt(cost)#標準偏差
@@ -415,7 +415,7 @@ try:
           for i in range(N):
             value = value + sample_array[i][k] * w14[i]
           st.write(f'{value=}')
-          cost = cost + (value - Wu)**2
+          cost = cost + (value - Wu14)**2
         cost = 1/K * cost
         st.write(f'{cost=}')
         standard_deviation = math.sqrt(cost)#標準偏差
@@ -429,7 +429,7 @@ try:
           for i in range(N):
             value = value + sample_array[i][k] * w15[i]
           st.write(f'{value=}')
-          cost = cost + (value - Wu)**2
+          cost = cost + (value - Wu15)**2
         cost = 1/K * cost
         st.write(f'{cost=}')
         standard_deviation = math.sqrt(cost)#標準偏差
@@ -443,7 +443,7 @@ try:
           for i in range(N):
             value = value + sample_array[i][k] * w16[i]
           st.write(f'{value=}')
-          cost = cost + (value - Wu)**2
+          cost = cost + (value - Wu16)**2
         cost = 1/K * cost
         st.write(f'{cost=}')
         standard_deviation = math.sqrt(cost)#標準偏差
@@ -457,7 +457,7 @@ try:
           for i in range(N):
             value = value + sample_array[i][k] * w17[i]
           st.write(f'{value=}')
-          cost = cost + (value - Wu)**2
+          cost = cost + (value - Wu17)**2
         cost = 1/K * cost
         st.write(f'{cost=}')
         standard_deviation = math.sqrt(cost)#標準偏差
