@@ -344,7 +344,7 @@ try:
         st.write('')
         st.write('結果の確認')
         #生徒の成績テーブルの平均
-        Wu11 = 1/K * sum(w11[i]*sum(sample_array[i][k] for k in range(K)) for i in range(N))
+        Wu11 = 1/K * sum(w11_5to1[i]*sum(sample_array[i][k] for k in range(K)) for i in range(N))
         st.write('成績1：'f'ave={Wu11}')
         Wu12 = 1/K * sum(w12[i]*sum(sample_array[i][k] for k in range(K)) for i in range(N))
         st.write('成績2：'f'ave={Wu12}')
@@ -371,7 +371,7 @@ try:
         for k in range(K):
           value = 0
           for i in range(N):
-            value = value + sample_array[i][k] * w11[i]
+            value = value + sample_array[i][k] * w11_5to1[i]
           st.write(f'{value=}')
           cost = cost + (value - Wu11)**2
         cost = 1/K * cost
@@ -480,7 +480,7 @@ try:
           for i in range(N):
             value1 = value1 + sample_array[i][k] * w1[i]
           st.write(f'{value1=}')
-          cost1 = cost1 + (value - W1u)**2
+          cost1 = cost1 + (value1 - W1u)**2
         cost1 = 1/K * cost1
         st.write(f'{cost1=}')
         standard_deviation1 = math.sqrt(cost1)#標準偏差
