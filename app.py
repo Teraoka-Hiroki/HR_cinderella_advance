@@ -237,17 +237,17 @@ try:
         lam1 = 10
         lam2 = 10
 
-        a11=1
-        a12=1
-        a13=1
-        a14=1
-        a15=1
-        a16=1
-        a17=1
+        a11=3
+        a12=3
+        a13=3
+        a14=3
+        a15=3
+        a16=3
+        a17=3
 
-        b=1
-        c=1
-        d=10
+        b=3
+        c=3
+        d=1
 
         cost11  = 1/K * sum((sum(w11[i]*x[i,k] for i in range(N)) - 1/K * sum(sum(w11[i]*x[i,k] for i in range(N)) for k in range(K)))**2 for k in range(K))
         cost12  = 1/K * sum((sum(w12[i]*x[i,k] for i in range(N)) - 1/K * sum(sum(w12[i]*x[i,k] for i in range(N)) for k in range(K)))**2 for k in range(K))
@@ -344,7 +344,7 @@ try:
         st.write('')
         st.write('結果の確認')
         #生徒の成績テーブルの平均
-        Wu11 = 1/K * sum(w11_5to1[i]*sum(sample_array[i][k] for k in range(K)) for i in range(N))
+        Wu11 = 1/K * sum(w11[i]*sum(sample_array[i][k] for k in range(K)) for i in range(N))
         st.write('成績1：'f'ave={Wu11}')
         Wu12 = 1/K * sum(w12[i]*sum(sample_array[i][k] for k in range(K)) for i in range(N))
         st.write('成績2：'f'ave={Wu12}')
@@ -371,7 +371,7 @@ try:
         for k in range(K):
           value = 0
           for i in range(N):
-            value = value + sample_array[i][k] * w11_5to1[i]
+            value = value + sample_array[i][k] * w11[i]
           st.write(f'{value=}')
           cost = cost + (value - Wu11)**2
         cost = 1/K * cost
