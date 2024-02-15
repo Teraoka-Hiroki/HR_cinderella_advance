@@ -34,7 +34,10 @@ def download_zip_file(zip_file_path, zip_file_name):
 
 def process_uploaded_file(file):
     df, column11_data, column12_data,column13_data,column14_data,column15_data,column16_data,column17_data,\
-     column2_data, column3_data ,column4_data = None, None, None, None, None, None,None,None,None,None, None
+     column2_data, column3_data ,column4_data ,\
+      column11_data_3to1,column12_data_3to1,column13_data_3to1,\
+        column14_data_3to1,column15_data_3to1,column16_data_3to1,column17_data_3to1\
+          = None, None, None, None, None, None,None,None,None,None, None, None, None, None, None, None, None, None
 
     try:
         # CSVファイルを読み込む
