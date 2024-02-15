@@ -95,7 +95,7 @@ def process_uploaded_file(file):
                    column15_data,column15_data_5to1,column15_data_1to1,\
                     column16_data,column16_data_5to1,column16_data_1to1,\
                       column17_data,column17_data_5to1,column17_data_1to1,\
-                        column2_data, column3_data, column4_data\
+                        column2_data, column3_data, column4_data, \
                           column11_data_3to1,column12_data_3to1,column13_data_3to1,\
                             column14_data_3to1,column15_data_3to1,column16_data_3to1,column17_data_3to1
 
