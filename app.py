@@ -49,7 +49,7 @@ def process_uploaded_file(file):
         column11_data_5to1 = [1 if x == 5 else 0 for x in column11_data]
         column11_data_3to1 = [1 if x == 3 else 0 for x in column11_data]
         column11_data_1to1 = [1 if x == 1 else 0 for x in column11_data]
-#        st.write(column11_data_5to1)
+
         column12_data = df.iloc[:, 3].tolist()
         column12_data_5to1 = [1 if x == 5 else 0 for x in column12_data]
         column12_data_3to1 = [1 if x == 3 else 0 for x in column12_data]
@@ -99,7 +99,7 @@ def process_uploaded_file(file):
                     column16_data,column16_data_5to1,column16_data_1to1,\
                       column17_data,column17_data_5to1,column17_data_1to1,\
                         column2_data, column3_data, column4_data, \
-                          column11_data_3to1,column12_data_3to1,column13_data_3to1,\
+                          column11_data_3to1, column12_data_3to1, column13_data_3to1,\
                             column14_data_3to1,column15_data_3to1,column16_data_3to1,column17_data_3to1
 
 def upload_file_youin():
@@ -118,7 +118,7 @@ def upload_file_youin():
                     column16_data,column16_data_5to1,column16_data_1to1,\
                       column17_data,column17_data_5to1,column17_data_1to1,\
                         column2_data, column3_data, column4_data,\
-                          column11_data_3to1,column12_data_3to1,column13_data_3to1,\
+                          column11_data_3to1, column12_data_3to1, column13_data_3to1,\
                             column14_data_3to1,column15_data_3to1,column16_data_3to1,column17_data_3to1\
                               = process_uploaded_file(uploaded_file)
 
