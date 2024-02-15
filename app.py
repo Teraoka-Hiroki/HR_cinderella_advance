@@ -333,16 +333,15 @@ try:
             cost = a11*cost11 + a12*cost12 + a13*cost13 + a14*cost14 + a15*cost15 + a16*cost16 + a17*cost17+ b*cost2 + c*cost3 +d*cost4\
                + a11*cost11_5to1 + a11*cost11_1to1 + a12*cost12_5to1 + a12*cost12_1to1 + a13*cost13_5to1 + a13*cost13_1to1 \
                 + a14*cost14_5to1 + a14*cost14_1to1 + a15*cost15_5to1 + a15*cost15_1to1 + a16*cost16_5to1 + a16*cost16_1to1 + a17*cost17_5to1 + a17*cost17_1to1 \
-                  + a11*cost11_3to1 + a12*column12_data_3to1 + a13*column13_data_3to1 + a14*column14_data_3to1 \
-                    + a15*column15_data_3to1 + a16*column16_data_3to1 + a17*cost17_3to1 
+                  + a11*cost11_3to1 + a12*cost12_3to1 + a13*cost13_3to1 + a14*cost14_3to1 \
+                    + a15*cost15_3to1 + a16*cost16_3to1 + a17*cost17_3to1 
 
         else:
             cost = a11*cost11 + a12*cost12 + a13*cost13 + a14*cost14 + a15*cost15 + a16*cost16 + a17*cost17+ b*cost2 + c*cost3 \
               + a11*cost11_5to1 + a11*cost11_1to1 + a12*cost12_5to1 + a12*cost12_1to1 + a13*cost13_5to1 + a13*cost13_1to1 \
                 + a14*cost14_5to1 + a14*cost14_1to1 + a15*cost15_5to1 + a15*cost15_1to1 + a16*cost16_5to1 + a16*cost16_1to1 + a17*cost17_5to1 + a17*cost17_1to1 \
-                  + a11*cost11_3to1 + a12*column12_data_3to1 + a13*column13_data_3to1 + a14*column14_data_3to1 \
-                    + a15*column15_data_3to1 + a16*column16_data_3to1 + a17*cost17_3to1 
-
+                  + a11*cost11_3to1 + a12*cost12_3to1 + a13*cost13_3to1 + a14*cost14_3to1 \
+                    + a15*cost15_3to1 + a16*cost16_3to1 + a17*cost17_3to1 
         
         penalty1 = lam1 * sum((sum(x[i,k] for k in range(K)) -1 )**2 for i in range(N))
         penalty2 = lam2 * sum((sum(x[i,k] for i in range(N)) -N/K )**2 for k in range(K))
