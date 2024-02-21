@@ -213,11 +213,12 @@ def left_column():
 
     st.write('固定生徒をCSVファイルとしてダウンロードしてください')
     st.write(df)
+    download_csv(df)
     # CSVファイルとしてダウンロードするためのリンクを生成
-    csv = df.to_csv(index=True)
-    b64 = base64.b64encode(csv.encode()).decode()
-    href = f'<a href="data:file/csv;base64,{b64}" download="data_kotei.csv">固定生徒のCSVファイルをダウンロード</a>'
-    st.markdown(href, unsafe_allow_html=True)
+    #csv = df.to_csv(index=True)
+    #b64 = base64.b64encode(csv.encode()).decode()
+    #href = f'<a href="data:file/csv;base64,{b64}" download="data_kotei.csv">固定生徒のCSVファイルをダウンロード</a>'
+    #st.markdown(href, unsafe_allow_html=True)
 
 
 def head():
