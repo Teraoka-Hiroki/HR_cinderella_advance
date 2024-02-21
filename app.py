@@ -191,6 +191,17 @@ def download_csv(data, filename='result_data.csv'):
     </a>
     ''', unsafe_allow_html=True)
 
+def download_csv2(data, filename='pre_data.csv'):
+    df = pd.DataFrame(data)
+    csv = df.to_csv(index=True)
+
+    b64 = b64encode(csv.encode()).decode()
+    st.sidebar.markdown(f'''
+    <a href="data:file/csv;base64,{b64}" download="{filename}">
+        固定生徒ファイルのダウンロード
+    </a>
+    ''', unsafe_allow_html=True)
+
 
 def left_column():
     st.sidebar.write("こちらに固定生徒自動生成機能が実装される")
@@ -213,7 +224,7 @@ def left_column():
 
     st.sidebar.write('固定生徒をCSVファイルとしてダウンロードしてください')
     st.sidebar.write(df)
-    download_csv(df)
+    download_csv2(df)
     # CSVファイルとしてダウンロードするためのリンクを生成
     #csv = df.to_csv(index=True)
     #b64 = base64.b64encode(csv.encode()).decode()
@@ -611,15 +622,15 @@ def main():
 #    st.title("左右に分割されたアプリ")
     head()
     # 左右に2つの列を作成
-    left, right = st.columns(2)
+#    left, right = st.columns(2)
 
     # 左側の列に機能を配置
-    with left:
-        left_column()
+#    with left:
+    left_column()
 
     # 右側の列に機能を配置
-    with right:
-        right_column()
+#    with right:
+    right_column()
 
 if __name__ == "__main__":
     main()
