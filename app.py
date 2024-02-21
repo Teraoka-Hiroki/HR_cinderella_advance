@@ -193,15 +193,15 @@ def download_csv(data, filename='result_data.csv'):
 
 
 def left_column():
-    st.write("こちらに固定生徒自動生成機能が実装される")
-    st.write("")
+    st.sidebar.write("こちらに固定生徒自動生成機能が実装される")
+    st.sidebar.write("")
 
-    uploaded_file = st.file_uploader("固定する生徒のリストファイルをアップロードしてください", type=['txt'])
+    uploaded_file = st.sidebar.file_uploader("固定する生徒のリストファイルをアップロードしてください", type=['txt'])
 
     if uploaded_file is not None:
             content = uploaded_file.getvalue().decode("utf-8")
             token = content.strip()
-            st.success("固定生徒のリストを正常に読み込みました！")
+            st.sidebar.success("固定生徒のリストを正常に読み込みました！")
 
     
     data = [[0, 1, 0, 0],
@@ -211,8 +211,8 @@ def left_column():
   
     df = pd.DataFrame(data)
 
-    st.write('固定生徒をCSVファイルとしてダウンロードしてください')
-    st.write(df)
+    st.sidebar.write('固定生徒をCSVファイルとしてダウンロードしてください')
+    st.sidebar.write(df)
     download_csv(df)
     # CSVファイルとしてダウンロードするためのリンクを生成
     #csv = df.to_csv(index=True)
