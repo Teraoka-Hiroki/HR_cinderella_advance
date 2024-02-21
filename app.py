@@ -13,11 +13,11 @@ import os
 
 
 # タイトルの表示
-st.title("ホームルーム シンデレラ（STANDARD）")
+st.title("ホームルーム シンデレラ（ADVANCE）")
 
 # 説明の表示
 st.write("「生徒のクラス分け」アプリ　FROM　量子アニーリングマシン：Fixstars Amplify")
-st.write("量子アニーリングマシン：Fixstars Amplify")
+#st.write("量子アニーリングマシン：Fixstars Amplify")
 
 
 
