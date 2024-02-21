@@ -606,8 +606,7 @@ try:
         st.write(output_text)
 
 except Exception as e:
-#          st.error("ファイルアップロード後に計算されます".format(e))
-    st.error("ファイルアップロード後に計算されます{}".format(e))
+        st.error("ファイルアップロード後に計算されます".format(e))
+#    st.error("ファイルアップロード後に計算されます{}".format(e))
 
 
-    head()
