@@ -12,7 +12,7 @@ from amplify import Solver
 import os
 import networkx as nx
 from io import StringIO
-
+import csv
 
 
 # タイトルの表示
