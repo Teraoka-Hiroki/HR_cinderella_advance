@@ -352,7 +352,7 @@ def left_column():
 
           groups, student_to_group = make_groups(wanted_pairs)
           classes, unassigned_students = assign_classes(groups, student_to_group, unwanted_pairs, num_classes=K)
-
+          st.sidebar.write(classes)
           st.sidebar.write(f"未割り当ての生徒: {sorted(list(unassigned_students))}")
 
           df2 = save_results_to_csv(classes, num_students=number)
