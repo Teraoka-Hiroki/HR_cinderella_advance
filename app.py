@@ -333,7 +333,7 @@ def left_column():
 
             if uploaded_file2 is not None:
                     content2 = uploaded_file2.getvalue().decode("utf-8")
-                    token = content.strip()
+                    token2 = content2.strip()
                     st.sidebar.success("リストを正常に読み込みました！")
 
     
