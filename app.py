@@ -101,7 +101,7 @@ def assign_classes(groups, student_to_group, unwanted_pairs, num_classes=4):
 def save_results_to_csv(classes, num_students=100):
     output = StringIO()
     writer = csv.writer(output)
-    writer.writerow(['出席番号'] + [f'{i} 組' for i in range(len(classes))])
+#    writer.writerow(['出席番号'] + [f'{i} 組' for i in range(len(classes))])
     for i in range(1, num_students + 1):
         row = [i] + [1 if i in class_list else 0 for class_list in classes]
         writer.writerow(row)
