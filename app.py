@@ -326,7 +326,7 @@ def left_column():
             content1 = uploaded_file.getvalue().decode("utf-8")
             token1 = content1.strip()
             st.sidebar.success("リストを正常に読み込みました！")
-
+            st.sidebar.write(content1)
             wanted_pairs = [content1.strip().split(',') for line in content1]
             wanted_pairs = pair_elements(wanted_pairs)
 
@@ -336,23 +336,14 @@ def left_column():
                     content2 = uploaded_file2.getvalue().decode("utf-8")
                     token2 = content2.strip()
                     st.sidebar.success("リストを正常に読み込みました！")
-
+                    st.sidebar.write(content2)
     
                     unwanted_pairs = [content2.strip().split(',') for line in content2]
                     unwanted_pairs = pair_elements(unwanted_pairs)
 
                     groups, student_to_group = make_groups(wanted_pairs)
                     classes, unassigned_students = assign_classes(groups, student_to_group, unwanted_pairs, num_classes=K)
-                    data_g=groups
-                    formatted_data = [[item.replace('\r', '').replace('\r\n', '\n') for item in sublist] for sublist in data_g]
-                    for sublist in formatted_data:
-                          st.sidebar.write('\n'.join(sublist))
-#                          st.sidebar.write(f"同じ組グループ: {groups}")
-                    data_u = unwanted_pairs
-                    formatted_data2 = [[item.replace('\r', '').replace('\r\n', '\n') for item in sublist] for sublist in data_u]
-                    for sublist in formatted_data2:
-                          st.sidebar.write('\n'.join(sublist))
-#                    st.sidebar.write(f"別の組グループ: {unwanted_pairs}")
+
                     st.sidebar.write(f"未割り当ての生徒: {sorted(list(unassigned_students))}")
 
                     df2 = save_results_to_csv(classes, num_students=number)
