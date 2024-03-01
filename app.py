@@ -326,7 +326,11 @@ def left_column():
             content1 = uploaded_file.getvalue().decode("utf-8")
             token1 = content1.strip()
             st.sidebar.success("リストを正常に読み込みました！")
-            wanted_pairs = [token1.strip().split(',') for line in token1]
+            st.sidebar.write(token1)
+            # CSVファイルをリストに変換する
+            reader = csv.reader(content1.splitlines())
+            wanted_pairs = list(reader)
+#            wanted_pairs = [token1.strip().split(',') for line in token1]
             wanted_pairs = pair_elements(wanted_pairs)
 
             uploaded_file2 = st.sidebar.file_uploader("違うクラスにしたい生徒のリストファイルをアップロードしてください", type=['csv'])
@@ -335,9 +339,11 @@ def left_column():
                     content2 = uploaded_file2.getvalue().decode("utf-8")
                     token2 = content2.strip()
                     st.sidebar.success("リストを正常に読み込みました！")
-                    st.sidebar.write(content2)
-    
-                    unwanted_pairs = [token2.strip().split(',') for line in token2]
+                    st.sidebar.write(token2)
+                    # CSVファイルをリストに変換する
+                    reader2 = csv.reader(content2.splitlines())
+                    unwanted_pairs = list(reader2)
+#                    unwanted_pairs = [token2.strip().split(',') for line in token2]
                     unwanted_pairs = pair_elements(unwanted_pairs)
 
                     groups, student_to_group = make_groups(wanted_pairs)
