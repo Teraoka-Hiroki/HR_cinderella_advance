@@ -10,6 +10,9 @@ from amplify import FixstarsClient
 from amplify import solve, FixstarsClient
 from amplify import Solver
 import os
+import networkx as nx
+from io import StringIO
+
 
 
 # タイトルの表示
@@ -18,6 +21,102 @@ st.title("ホームルーム シンデレラ（ADVANCE）")
 # 説明の表示
 st.write("「生徒のクラス分け」アプリ　FROM　量子アニーリングマシン：Fixstars Amplify")
 #st.write("量子アニーリングマシン：Fixstars Amplify")
+
+def make_groups(pairs):
+    # ペアリストからグラフを生成
+    G = nx.Graph()
+    G.add_edges_from(pairs)
+
+    # 連結成分（ここでは学生のグループ）を抽出
+    groups = list(nx.connected_components(G))
+
+    # 各グループをソート
+    groups = [sorted(group) for group in groups]
+
+    # 学生とその所属するグループの対応を表す辞書を作成
+    student_to_group = {}
+    for group in groups:
+        for student in group:
+            student_to_group[student] = group
+
+    return groups, student_to_group
+
+
+def can_assign(student, class_group, unwanted_pairs):
+    for other_student in class_group:
+        if (student, other_student) in unwanted_pairs or (other_student, student) in unwanted_pairs:
+            return False
+    return True
+
+
+def assign_classes(groups, student_to_group, unwanted_pairs, num_classes=4):
+    # クラスに生徒を割り当て
+    classes = [set() for _ in range(num_classes)]  # クラスごとの生徒の集合を作成
+    class_sizes = [0] * num_classes  # クラスのサイズ（生徒数）を追跡
+    student_to_class = {}  # 生徒がどのクラスに割り当てられているかを追跡
+    unassigned_students = set()  # 割り当てられなかった生徒を追跡
+
+    for pair in unwanted_pairs:
+        student1, student2 = pair
+
+        # 各生徒に対して
+        for student in [student1, student2]:
+            # 生徒がすでにクラスに割り当てられている場合はスキップ
+            if student in student_to_class:
+                continue
+
+            # 生徒が属しているグループを取得（グループがない場合は生徒自体がグループ）
+            group = student_to_group.get(student, {student})
+
+            # 生徒数が最小のクラスから順に、生徒をそのクラスに割り当てられるか確認
+            for class_index in sorted(range(num_classes), key=lambda i: class_sizes[i]):
+                if all(can_assign(s, classes[class_index], unwanted_pairs) for s in group):
+                    # 生徒をクラスに割り当て
+                    classes[class_index].update(group)
+                    class_sizes[class_index] += len(group)
+                    student_to_class.update({s: class_index for s in group})
+                    break  # 割り当てに成功したら次の生徒へ
+            else:
+                # 全てのクラスで割り当てられない場合、生徒を未割り当てリストに追加
+                unassigned_students.update(group)
+
+    # 未割り当てのグループを割り当て
+    unassigned_groups = [group for group in groups if not any(student in student_to_class for student in group)]
+    for group in unassigned_groups:
+        # 生徒数が最小のクラスから順に、生徒をそのクラスに割り当てられるか確認
+        for class_index in sorted(range(num_classes), key=lambda i: class_sizes[i]):
+            if all(can_assign(student, classes[class_index], unwanted_pairs) for student in group):
+                # 生徒をクラスに割り当て
+                classes[class_index].update(group)
+                class_sizes[class_index] += len(group)
+                student_to_class.update({s: class_index for s in group})
+                break  # 割り当てに成功したら次のグループへ
+        else:
+            # 全てのクラスで割り当てられない場合、生徒を未割り当てリストに追加
+            unassigned_students.update(group)
+
+    return classes, unassigned_students
+
+
+def save_results_to_csv(classes, num_students=100):
+    output = StringIO()
+    writer = csv.writer(output)
+    writer.writerow(['出席番号'] + [f'{i} 組' for i in range(len(classes))])
+    for i in range(1, num_students + 1):
+        row = [i] + [1 if i in class_list else 0 for class_list in classes]
+        writer.writerow(row)
+    csv_content = output.getvalue()
+    output.close()
+    return csv_content
+
+def pair_elements(original_list):
+    result_list = []
+
+    for sublist in original_list:
+        for item in sublist[1:]:
+            result_list.append([sublist[0], item])
+
+    return result_list
 
 
 
@@ -205,31 +304,60 @@ def download_csv2(data, filename='pre_data.csv'):
 
 
 def left_column():
-    st.sidebar.write("こちらに固定生徒自動生成機能が実装される")
+    st.sidebar.write("##固定する生徒のリストファイルの自動生成")
     st.sidebar.write("")
 
-    uploaded_file = st.sidebar.file_uploader("固定する生徒のリストファイルをアップロードしてください", type=['txt'])
+
+    selected_number=0
+# プルダウンメニューで1から15までの整数を選択
+    selected_number = st.sidebar.selectbox("クラス数を選んでください", list(range(0, 16)))
+    if selected_number!=0:
+        K = selected_number
+        st.sidebar.write("クラス数：K = ",K)
+    else:
+        st.sidebar.write("クラス数を確定してください")
+
+    number = st.sidebar.number_input("生徒数を入力してください", step=1)
+
+    uploaded_file = st.sidebar.file_uploader("同じクラスにしたい生徒のリストファイルをアップロードしてください", type=['txt'])
 
     if uploaded_file is not None:
-            content = uploaded_file.getvalue().decode("utf-8")
+            content1 = uploaded_file.getvalue().decode("utf-8")
             token = content.strip()
-            st.sidebar.success("固定生徒のリストを正常に読み込みました！")
+            st.sidebar.success("リストを正常に読み込みました！")
+
+    wanted_pairs = [content1.strip().split(',') for line in content1]
+    wanted_pairs = pair_elements(wanted_pairs)
+
+    uploaded_file2 = st.sidebar.file_uploader("違うクラスにしたい生徒のリストファイルをアップロードしてください", type=['txt'])
+
+    if uploaded_file2 is not None:
+            content2 = uploaded_file2.getvalue().decode("utf-8")
+            token = content.strip()
+            st.sidebar.success("リストを正常に読み込みました！")
 
     
-    data = [[0, 1, 0, 0],
-           [1 ,0, 0, 9],
-           [1, 0, 0, 0],
-           [0, 0, 0, 1]]
-  
-    df = pd.DataFrame(data)
+    unwanted_pairs = [content2.strip().split(',') for line in content2]
+    unwanted_pairs = pair_elements(unwanted_pairs)
 
-    st.sidebar.write('固定生徒をCSVファイルとしてダウンロードしてください')
-    st.sidebar.write(df)
-    download_csv2(df)
+    groups, student_to_group = make_groups(wanted_pairs)
+    classes, unassigned_students = assign_classes(groups, student_to_group, unwanted_pairs, num_classes=K)
+
+    st.sidebar.write(f"同じ組グループ: {groups}")
+    st.sidebar.write(f"別の組グループ: {unwanted_pairs}")
+    st.sidebar.write(f"未割り当ての生徒: {sorted(list(unassigned_students))}")
+
+    df2 = save_results_to_csv(classes, num_students=number)
+
+    st.sidebar.write(df2)
+
+    st.sidebar.write("固定生徒のリストのCSVファイルをダウンロードしてください。")
+
+    download_csv2(df2, filename='class_assignments_0.csv')
+
     # CSVファイルとしてダウンロードするためのリンクを生成
     #csv = df.to_csv(index=True)
     #b64 = base64.b64encode(csv.encode()).decode()
-    #href = f'<a href="data:file/csv;base64,{b64}" download="data_kotei.csv">固定生徒のCSVファイルをダウンロード</a>'
     #st.markdown(href, unsafe_allow_html=True)
 
 left_column()
