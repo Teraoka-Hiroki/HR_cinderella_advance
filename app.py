@@ -297,7 +297,8 @@ def download_csv(data, filename='result_data.csv'):
 
 def download_csv2(df, filename='pre_data.csv'):
 #    df = pd.DataFrame(data)
-    csv = df.to_csv(index=False)
+#    csv = df.to_csv(index=False)
+    csv=df
 
     b64 = b64encode(csv.encode()).decode()
     st.sidebar.markdown(f'''
