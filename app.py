@@ -329,31 +329,31 @@ def left_column():
             wanted_pairs = [content1.strip().split(',') for line in content1]
             wanted_pairs = pair_elements(wanted_pairs)
 
-    uploaded_file2 = st.sidebar.file_uploader("違うクラスにしたい生徒のリストファイルをアップロードしてください", type=['txt'])
+            uploaded_file2 = st.sidebar.file_uploader("違うクラスにしたい生徒のリストファイルをアップロードしてください", type=['txt'])
 
-    if uploaded_file2 is not None:
-            content2 = uploaded_file2.getvalue().decode("utf-8")
-            token = content.strip()
-            st.sidebar.success("リストを正常に読み込みました！")
+            if uploaded_file2 is not None:
+                    content2 = uploaded_file2.getvalue().decode("utf-8")
+                    token = content.strip()
+                    st.sidebar.success("リストを正常に読み込みました！")
 
     
-            unwanted_pairs = [content2.strip().split(',') for line in content2]
-            unwanted_pairs = pair_elements(unwanted_pairs)
+                    unwanted_pairs = [content2.strip().split(',') for line in content2]
+                    unwanted_pairs = pair_elements(unwanted_pairs)
 
-    groups, student_to_group = make_groups(wanted_pairs)
-    classes, unassigned_students = assign_classes(groups, student_to_group, unwanted_pairs, num_classes=K)
+                    groups, student_to_group = make_groups(wanted_pairs)
+                    classes, unassigned_students = assign_classes(groups, student_to_group, unwanted_pairs, num_classes=K)
 
-    st.sidebar.write(f"同じ組グループ: {groups}")
-    st.sidebar.write(f"別の組グループ: {unwanted_pairs}")
-    st.sidebar.write(f"未割り当ての生徒: {sorted(list(unassigned_students))}")
+                    st.sidebar.write(f"同じ組グループ: {groups}")
+                    st.sidebar.write(f"別の組グループ: {unwanted_pairs}")
+                    st.sidebar.write(f"未割り当ての生徒: {sorted(list(unassigned_students))}")
 
-    df2 = save_results_to_csv(classes, num_students=number)
+                    df2 = save_results_to_csv(classes, num_students=number)
 
-    st.sidebar.write(df2)
+                    st.sidebar.write(df2)
 
-    st.sidebar.write("固定生徒のリストのCSVファイルをダウンロードしてください。")
+                    st.sidebar.write("固定生徒のリストのCSVファイルをダウンロードしてください。")
 
-    download_csv2(df2, filename='class_assignments_0.csv')
+                    download_csv2(df2, filename='class_assignments_0.csv')
 
     # CSVファイルとしてダウンロードするためのリンクを生成
     #csv = df.to_csv(index=True)
