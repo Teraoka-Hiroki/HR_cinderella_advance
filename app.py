@@ -294,7 +294,7 @@ def download_csv(data, filename='result_data.csv'):
 
 def download_csv2(df, filename='pre_data.csv'):
 #    df = pd.DataFrame(data)
-    csv = df.to_csv(index=True)
+    csv = df.to_csv(index=False)
 
     b64 = b64encode(csv.encode()).decode()
     st.sidebar.markdown(f'''
@@ -343,9 +343,16 @@ def left_column():
 
                     groups, student_to_group = make_groups(wanted_pairs)
                     classes, unassigned_students = assign_classes(groups, student_to_group, unwanted_pairs, num_classes=K)
-
-                    st.sidebar.write(f"同じ組グループ: {groups}")
-                    st.sidebar.write(f"別の組グループ: {unwanted_pairs}")
+                    data_g=groups
+                    formatted_data = [[item.replace('\r', '').replace('\r\n', '\n') for item in sublist] for sublist in data_g]
+                    for sublist in formatted_data:
+                          st.slider.write('\n'.join(sublist))
+#                          st.sidebar.write(f"同じ組グループ: {groups}")
+                    data_u = unwanted_pairs
+                    formatted_data2 = [[item.replace('\r', '').replace('\r\n', '\n') for item in sublist] for sublist in data_u]
+                    for sublist in formatted_data2:
+                          st.slider.write('\n'.join(sublist))
+#                    st.sidebar.write(f"別の組グループ: {unwanted_pairs}")
                     st.sidebar.write(f"未割り当ての生徒: {sorted(list(unassigned_students))}")
 
                     df2 = save_results_to_csv(classes, num_students=number)
