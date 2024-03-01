@@ -103,7 +103,7 @@ def save_results_to_csv(classes, num_students=100):
     
     data = []
     for i in range(1, num_students + 1):
-        row = [1 if i in class_members[j] else 0 for j in range(len(classes))]
+        row = [1 if str(i) in class_members[j] else 0 for j in range(len(classes))]  # 修正箇所
         data.append(row)
     
     columns = [f"Class_{i+1}" for i in range(len(classes))]
@@ -111,7 +111,6 @@ def save_results_to_csv(classes, num_students=100):
     df.insert(0, "Student_ID", range(1, num_students + 1))
     
     return df
-
 
 def pair_elements(original_list):
     result_list = []
