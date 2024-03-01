@@ -292,8 +292,8 @@ def download_csv(data, filename='result_data.csv'):
     </a>
     ''', unsafe_allow_html=True)
 
-def download_csv2(data, filename='pre_data.csv'):
-    df = pd.DataFrame(data)
+def download_csv2(df, filename='pre_data.csv'):
+#    df = pd.DataFrame(data)
     csv = df.to_csv(index=True)
 
     b64 = b64encode(csv.encode()).decode()
