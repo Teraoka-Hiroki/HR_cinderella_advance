@@ -321,23 +321,23 @@ def left_column():
     number = st.sidebar.number_input("生徒数を入力してください", step=1)
 
     uploaded_file = st.sidebar.file_uploader("同じクラスにしたい生徒のリストファイルをアップロードしてください", type=['csv'])
-    st.sidebar.write(uploaded_file)
+#    st.sidebar.write(uploaded_file)
     if uploaded_file is not None:
             content1 = uploaded_file.getvalue().decode("utf-8")
             token1 = content1.strip()
             st.sidebar.success("リストを正常に読み込みました！")
-            wanted_pairs = [content1.strip().split(',') for line in content1]
+            wanted_pairs = [token1.strip().split(',') for line in token1]
             wanted_pairs = pair_elements(wanted_pairs)
 
             uploaded_file2 = st.sidebar.file_uploader("違うクラスにしたい生徒のリストファイルをアップロードしてください", type=['csv'])
-            st.sidebar.write(uploaded_file2)
+#            st.sidebar.write(uploaded_file2)
             if uploaded_file2 is not None:
                     content2 = uploaded_file2.getvalue().decode("utf-8")
                     token2 = content2.strip()
                     st.sidebar.success("リストを正常に読み込みました！")
                     st.sidebar.write(content2)
     
-                    unwanted_pairs = [content2.strip().split(',') for line in content2]
+                    unwanted_pairs = [token2.strip().split(',') for line in token2]
                     unwanted_pairs = pair_elements(unwanted_pairs)
 
                     groups, student_to_group = make_groups(wanted_pairs)
