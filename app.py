@@ -319,7 +319,7 @@ def left_column():
 
     number = st.sidebar.number_input("生徒数を入力してください", step=1)
 
-    uploaded_file = st.sidebar.file_uploader("同じクラスにしたい生徒のリストファイルをアップロードしてください", type=['txt'])
+    uploaded_file = st.sidebar.file_uploader("同じクラスにしたい生徒のリストファイルをアップロードしてください", type=['csv'])
 
     if uploaded_file is not None:
             content1 = uploaded_file.getvalue().decode("utf-8")
@@ -329,7 +329,7 @@ def left_column():
             wanted_pairs = [content1.strip().split(',') for line in content1]
             wanted_pairs = pair_elements(wanted_pairs)
 
-            uploaded_file2 = st.sidebar.file_uploader("違うクラスにしたい生徒のリストファイルをアップロードしてください", type=['txt'])
+            uploaded_file2 = st.sidebar.file_uploader("違うクラスにしたい生徒のリストファイルをアップロードしてください", type=['csv'])
 
             if uploaded_file2 is not None:
                     content2 = uploaded_file2.getvalue().decode("utf-8")
