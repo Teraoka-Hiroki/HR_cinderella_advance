@@ -346,12 +346,12 @@ def left_column():
                     data_g=groups
                     formatted_data = [[item.replace('\r', '').replace('\r\n', '\n') for item in sublist] for sublist in data_g]
                     for sublist in formatted_data:
-                          st.slider.write('\n'.join(sublist))
+                          st.sidebar.write('\n'.join(sublist))
 #                          st.sidebar.write(f"同じ組グループ: {groups}")
                     data_u = unwanted_pairs
                     formatted_data2 = [[item.replace('\r', '').replace('\r\n', '\n') for item in sublist] for sublist in data_u]
                     for sublist in formatted_data2:
-                          st.slider.write('\n'.join(sublist))
+                          st.sidebar.write('\n'.join(sublist))
 #                    st.sidebar.write(f"別の組グループ: {unwanted_pairs}")
                     st.sidebar.write(f"未割り当ての生徒: {sorted(list(unassigned_students))}")
 
