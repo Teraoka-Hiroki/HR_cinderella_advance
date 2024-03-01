@@ -99,18 +99,18 @@ def assign_classes(groups, student_to_group, unwanted_pairs, num_classes=4):
 
 
 def save_results_to_csv(classes, num_students=100):
-    output = StringIO()
-    writer = csv.writer(output)
-    
-    # Set of students in each class
     class_members = [set(class_list) for class_list in classes]
     
+    data = []
     for i in range(1, num_students + 1):
-        row = [i] + [1 if i in class_members[j] else 0 for j in range(len(classes))]
-        writer.writerow(row)
+        row = [1 if i in class_members[j] else 0 for j in range(len(classes))]
+        data.append(row)
     
-    output.seek(0)  # Move the buffer position to the start
-    return output.getvalue()
+    columns = [f"Class_{i+1}" for i in range(len(classes))]
+    df = pd.DataFrame(data, columns=columns)
+    df.insert(0, "Student_ID", range(1, num_students + 1))
+    
+    return df
 
 
 def pair_elements(original_list):
@@ -297,8 +297,8 @@ def download_csv(data, filename='result_data.csv'):
 
 def download_csv2(df, filename='pre_data.csv'):
 #    df = pd.DataFrame(data)
-#    csv = df.to_csv(index=False)
-    csv=df
+    csv = df.to_csv(index=False)
+#    csv=df
 
     b64 = b64encode(csv.encode()).decode()
     st.sidebar.markdown(f'''
