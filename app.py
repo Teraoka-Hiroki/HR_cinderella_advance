@@ -326,8 +326,8 @@ def left_column():
             token1 = content1.strip()
             st.sidebar.success("リストを正常に読み込みました！")
 
-    wanted_pairs = [token1.strip().split(',') for line in token1]
-    wanted_pairs = pair_elements(wanted_pairs)
+            wanted_pairs = [content1.strip().split(',') for line in content1]
+            wanted_pairs = pair_elements(wanted_pairs)
 
     uploaded_file2 = st.sidebar.file_uploader("違うクラスにしたい生徒のリストファイルをアップロードしてください", type=['txt'])
 
@@ -337,8 +337,8 @@ def left_column():
             st.sidebar.success("リストを正常に読み込みました！")
 
     
-    unwanted_pairs = [content2.strip().split(',') for line in content2]
-    unwanted_pairs = pair_elements(unwanted_pairs)
+            unwanted_pairs = [content2.strip().split(',') for line in content2]
+            unwanted_pairs = pair_elements(unwanted_pairs)
 
     groups, student_to_group = make_groups(wanted_pairs)
     classes, unassigned_students = assign_classes(groups, student_to_group, unwanted_pairs, num_classes=K)
