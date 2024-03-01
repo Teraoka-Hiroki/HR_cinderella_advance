@@ -343,7 +343,7 @@ def left_column():
                     # CSVファイルをリストに変換する
                     reader2 = csv.reader(content2.splitlines())
                     unwanted_pairs = list(reader2)
-#                    unwanted_pairs = [token2.strip().split(',') for line in token2]
+                    st.sidebar.write(unwanted_pairs)
                     unwanted_pairs = pair_elements(unwanted_pairs)
 
                     groups, student_to_group = make_groups(wanted_pairs)
