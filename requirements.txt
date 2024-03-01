@@ -4,4 +4,3 @@ matplotlib
 numpy
 matplotlib
 networkx
-io
