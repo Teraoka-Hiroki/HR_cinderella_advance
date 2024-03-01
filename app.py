@@ -105,9 +105,10 @@ def save_results_to_csv(classes, num_students=100):
     for i in range(1, num_students + 1):
         row = [i] + [1 if i in class_list else 0 for class_list in classes]
         writer.writerow(row)
-    csv_content = output.getvalue()
+    output.seek(0)  # Move the buffer position to the start
+    df = pd.read_csv(output)
     output.close()
-    return csv_content
+    return df
 
 def pair_elements(original_list):
     result_list = []
