@@ -326,7 +326,7 @@ def left_column():
             content1 = uploaded_file.getvalue().decode("utf-8")
             token1 = content1.strip()
             st.sidebar.success("リストを正常に読み込みました！")
-            st.sidebar.write(content1)
+            st.sidebar.write(token1)
             wanted_pairs = [content1.strip().split(',') for line in content1]
             wanted_pairs = pair_elements(wanted_pairs)
 
