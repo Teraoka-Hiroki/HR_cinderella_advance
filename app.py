@@ -328,12 +328,12 @@ def left_column():
     if uploaded_file is not None:
       content1 = uploaded_file.getvalue().decode("utf-8")
       st.sidebar.success("リストを正常に読み込みました！")
-      st.sidebar.write(content1)
+#      st.sidebar.write(content1)
 
       # CSVファイルをリストに変換する
       reader = csv.reader(content1.splitlines())
       wanted_pairs = [row for row in reader]  # 各行をリストに追加
-      st.sidebar.write(wanted_pairs)
+#      st.sidebar.write(wanted_pairs)
       wanted_pairs = pair_elements(wanted_pairs)
 
       uploaded_file2 = st.sidebar.file_uploader("違うクラスにしたい生徒のリストファイルをアップロードしてください", type=['csv'])
@@ -342,11 +342,11 @@ def left_column():
           content2 = uploaded_file2.getvalue().decode("utf-8")
           token2 = content2.strip()
           st.sidebar.success("リストを正常に読み込みました！")
-          st.sidebar.write(token2)
+#          st.sidebar.write(token2)
           # CSVファイルをリストに変換する
           reader2 = csv.reader(content2.splitlines())
           unwanted_pairs = [row for row in reader2]  # 各行をリストに追加
-          st.sidebar.write(unwanted_pairs)
+#          st.sidebar.write(unwanted_pairs)
           unwanted_pairs = pair_elements(unwanted_pairs)
 
           groups, student_to_group = make_groups(wanted_pairs)
@@ -357,7 +357,7 @@ def left_column():
           df2 = save_results_to_csv(classes, num_students=number)
 
           st.sidebar.write(df2)
-          st.sidebar.write(classes)
+#          st.sidebar.write(classes)
           st.sidebar.write("固定生徒のリストのCSVファイルをダウンロードしてください。")
 
           download_csv2(df2, filename='class_assignments_0.csv')
