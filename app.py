@@ -106,7 +106,7 @@ def save_results_to_csv(classes, num_students=100):
         row = [i] + [1 if i in class_list else 0 for class_list in classes]
         writer.writerow(row)
     output.seek(0)  # Move the buffer position to the start
-    df = pd.read_csv(output)
+    df = pd.read_csv(output, header=True, )
     output.close()
     return df
 
