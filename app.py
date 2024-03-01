@@ -323,10 +323,10 @@ def left_column():
 
     if uploaded_file is not None:
             content1 = uploaded_file.getvalue().decode("utf-8")
-            token = content.strip()
+            token1 = content1.strip()
             st.sidebar.success("リストを正常に読み込みました！")
 
-    wanted_pairs = [content1.strip().split(',') for line in content1]
+    wanted_pairs = [token1.strip().split(',') for line in token1]
     wanted_pairs = pair_elements(wanted_pairs)
 
     uploaded_file2 = st.sidebar.file_uploader("違うクラスにしたい生徒のリストファイルをアップロードしてください", type=['txt'])
