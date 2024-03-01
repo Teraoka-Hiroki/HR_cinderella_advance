@@ -101,12 +101,17 @@ def assign_classes(groups, student_to_group, unwanted_pairs, num_classes=4):
 def save_results_to_csv(classes, num_students=100):
     output = StringIO()
     writer = csv.writer(output)
+    
+    # Set of students in each class
+    class_members = [set(class_list) for class_list in classes]
+    
     for i in range(1, num_students + 1):
-        row = [i] + [1 if i in class_list else 0 for class_list in classes]
+        row = [i] + [1 if i in class_members[j] else 0 for j in range(len(classes))]
         writer.writerow(row)
+    
     output.seek(0)  # Move the buffer position to the start
-    df = pd.read_csv(output, header=None)
-    return df
+    return output.getvalue()
+
 
 def pair_elements(original_list):
     result_list = []
@@ -303,7 +308,7 @@ def download_csv2(df, filename='pre_data.csv'):
 
 
 def left_column():
-    st.sidebar.write("##固定する生徒のリストファイルの自動生成")
+    st.sidebar.write("固定する生徒のリストファイルの自動生成")
     st.sidebar.write("")
 
 
