@@ -321,44 +321,43 @@ def left_column():
     number = st.sidebar.number_input("生徒数を入力してください", step=1)
 
     uploaded_file = st.sidebar.file_uploader("同じクラスにしたい生徒のリストファイルをアップロードしてください", type=['csv'])
-#    st.sidebar.write(uploaded_file)
+
     if uploaded_file is not None:
-            content1 = uploaded_file.getvalue().decode("utf-8")
-            st.sidebar.success("リストを正常に読み込みました！")
-            st.sidebar.write(content1)
+      content1 = uploaded_file.getvalue().decode("utf-8")
+      st.sidebar.success("リストを正常に読み込みました！")
+      st.sidebar.write(content1)
 
-            # CSVファイルをリストに変換する
-            reader = csv.reader(content1.splitlines())
-            wanted_pairs = list(reader)
-            st.sidebar.write(wanted_pairs)
-            wanted_pairs = pair_elements(wanted_pairs)
+      # CSVファイルをリストに変換する
+      reader = csv.reader(content1.splitlines())
+      wanted_pairs = [row for row in reader]  # 各行をリストに追加
+      st.sidebar.write(wanted_pairs)
+      wanted_pairs = pair_elements(wanted_pairs)
 
-            uploaded_file2 = st.sidebar.file_uploader("違うクラスにしたい生徒のリストファイルをアップロードしてください", type=['csv'])
-#            st.sidebar.write(uploaded_file2)
-            if uploaded_file2 is not None:
-                    content2 = uploaded_file2.getvalue().decode("utf-8")
-                    token2 = content2.strip()
-                    st.sidebar.success("リストを正常に読み込みました！")
-                    st.sidebar.write(token2)
-                    # CSVファイルをリストに変換する
-                    reader2 = csv.reader(content2.splitlines())
-                    unwanted_pairs = list(reader2)
-                    st.sidebar.write(unwanted_pairs)
-                    unwanted_pairs = pair_elements(unwanted_pairs)
+      uploaded_file2 = st.sidebar.file_uploader("違うクラスにしたい生徒のリストファイルをアップロードしてください", type=['csv'])
 
-                    groups, student_to_group = make_groups(wanted_pairs)
-                    classes, unassigned_students = assign_classes(groups, student_to_group, unwanted_pairs, num_classes=K)
+      if uploaded_file2 is not None:
+          content2 = uploaded_file2.getvalue().decode("utf-8")
+          token2 = content2.strip()
+          st.sidebar.success("リストを正常に読み込みました！")
+          st.sidebar.write(token2)
+          # CSVファイルをリストに変換する
+          reader2 = csv.reader(content2.splitlines())
+          unwanted_pairs = [row for row in reader2]  # 各行をリストに追加
+          st.sidebar.write(unwanted_pairs)
+          unwanted_pairs = pair_elements(unwanted_pairs)
 
-                    st.sidebar.write(f"未割り当ての生徒: {sorted(list(unassigned_students))}")
+          groups, student_to_group = make_groups(wanted_pairs)
+          classes, unassigned_students = assign_classes(groups, student_to_group, unwanted_pairs, num_classes=K)
 
-                    df2 = save_results_to_csv(classes, num_students=number)
+          st.sidebar.write(f"未割り当ての生徒: {sorted(list(unassigned_students))}")
 
-                    st.sidebar.write(df2)
+          df2 = save_results_to_csv(classes, num_students=number)
 
-                    st.sidebar.write("固定生徒のリストのCSVファイルをダウンロードしてください。")
+          st.sidebar.write(df2)
 
-                    download_csv2(df2, filename='class_assignments_0.csv')
+          st.sidebar.write("固定生徒のリストのCSVファイルをダウンロードしてください。")
 
+          download_csv2(df2, filename='class_assignments_0.csv')
     # CSVファイルとしてダウンロードするためのリンクを生成
     #csv = df.to_csv(index=True)
     #b64 = base64.b64encode(csv.encode()).decode()
